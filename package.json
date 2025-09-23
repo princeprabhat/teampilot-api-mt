@@ -5,21 +5,25 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsc-watch --onSuccess \"npm start\"",
-    "build": "",
+    "build": "tsc",
     "start": "node dist/index.js"
   },
-  "keywords": ["Node", "Express", "GraphQL", "Apollo", "Prisma", "PostgreSQL", "TypeScript","Docker"],
+  "keywords": [
+    "Node",
+    "Express",
+    "Prisma",
+    "PostgreSQL",
+    "TypeScript",
+    "Docker"
+  ],
   "author": "Prince Prabhat",
   "license": "ISC",
-  "description": "Backend for TeamPilot Multi-Tenant Application using Node.js, Express, GraphQL, Apollo Server, Prisma ORM, and PostgreSQL.",
+  "description": "Backend for TeamPilot Multi-Tenant Application using Node.js, Express, Prisma ORM, and PostgreSQL.",
   "dependencies": {
-    "@apollo/server": "^5.0.0",
-    "@as-integrations/express5": "^1.1.2",
     "@prisma/client": "^6.16.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
-    "graphql": "^16.11.0",
     "helmet": "^8.1.0",
     "pg": "^8.16.3"
   },
@@ -29,6 +33,7 @@
     "@types/node": "^24.5.2",
     "prisma": "^6.16.2",
     "tsc-watch": "^7.1.1",
+    "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   }
 }
