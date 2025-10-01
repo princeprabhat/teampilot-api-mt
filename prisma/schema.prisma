@@ -14,9 +14,126 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
- 
+model Users {
+  id             Int       @id @default(autoincrement())
+  name           String?
+  email          String    @unique
+  email_verified Boolean   @default(false)
+  theme          Theme     @default(dark)
+  password       String
+  avatar_url     String?
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+
+  organizations  UserOrganization[]
+  projects       UserProject[]
+  tasks          Tasks[]          @relation("TaskAssignee")
+  comments       Comments[]
+}
+
+model Organizations {
+  id             Int                 @id @default(autoincrement())
+  name           String              @unique
+  description    String?
+  logo_url       String?
+  created_at     DateTime            @default(now())
+  updated_at     DateTime            @updatedAt
+
+  members        UserOrganization[]
+  projects       Projects[]
+}
+
+model UserOrganization {
+  id              Int            @id @default(autoincrement())
+  user_id         Int
+  organization_id Int
+  role            OrgRole        @default(member)
+  joined_at       DateTime       @default(now())
+
+  user            Users          @relation(fields: [user_id], references: [id])
+  organization    Organizations  @relation(fields: [organization_id], references: [id])
+}
+
+model Projects {
+  id             Int           @id @default(autoincrement())
+  name           String
+  description    String?
+  organization_id Int
+  created_at     DateTime      @default(now())
+  updated_at     DateTime      @updatedAt
+
+  organization   Organizations @relation(fields: [organization_id], references: [id])
+  members        UserProject[]
+  tasks          Tasks[]
+}
+
+model UserProject {
+  id         Int        @id @default(autoincrement())
+  user_id    Int
+  project_id Int
+  role       ProjectRole @default(member)
+  joined_at  DateTime   @default(now())
+
+  user       Users      @relation(fields: [user_id], references: [id])
+  project    Projects   @relation(fields: [project_id], references: [id])
+}
+
+model Tasks {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?
+  status      TaskStatus @default(todo)
+  priority    Priority   @default(medium)
+  assignee_id Int?
+  project_id  Int
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+  due_date    DateTime?
+
+  assignee    Users?     @relation("TaskAssignee", fields: [assignee_id], references: [id])
+  project     Projects   @relation(fields: [project_id], references: [id])
+  comments    Comments[]
+}
+
+model Comments {
+  id         Int       @id @default(autoincrement())
+  task_id    Int
+  user_id    Int
+  content    String
+  parent_id  Int?
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+
+  task       Tasks     @relation(fields: [task_id], references: [id])
+  user       Users     @relation(fields: [user_id], references: [id])
+  parent     Comments? @relation("CommentReplies", fields: [parent_id], references: [id])
+  replies    Comments[] @relation("CommentReplies")
+}
+
+enum Theme {
+  dark
+  light
+}
+
+enum OrgRole {
+  owner
+  admin
+  member
+}
+
+enum ProjectRole {
+  project_admin
+  member
+}
+
+enum TaskStatus {
+  todo
+  in_progress
+  done
+}
+
+enum Priority {
+  low
+  medium
+  high
 }
