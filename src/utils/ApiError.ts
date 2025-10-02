@@ -7,8 +7,6 @@
 
 
 export class ApiError extends Error{
-//   statusCode: number;
-//   isOperational: boolean;
 
   constructor
     (
@@ -17,10 +15,8 @@ export class ApiError extends Error{
     public isOperational = true,
     stack:any = ""
 ) {
-
     super(message);
-    this.statusCode = statusCode;
-    this.isOperational = isOperational;
+   
     if (stack) {
       this.stack = stack;
     } else {
@@ -28,3 +24,5 @@ export class ApiError extends Error{
     }
   }
 }
+
+

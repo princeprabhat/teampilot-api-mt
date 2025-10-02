@@ -1,8 +1,5 @@
-type pickParam = {
-    object: Record<string, any>;
-    keys: string[];
-}
-const pick = ({object, keys}:pickParam ) => {
+
+const pick = (object:Record<string,any>, keys:string[]) => {
   return keys.reduce((obj, key) => {
     if (object && Object.prototype.hasOwnProperty.call(object, key)) {
 
