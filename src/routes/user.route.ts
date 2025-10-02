@@ -5,13 +5,13 @@ const router = Router();
 
 
 // Example: POST /auth/login
-router.post('/getUser', (req: Request, res: Response) => {
+router.get('/getUser', (req: Request, res: Response) => {
     // Dummy implementation
-    const { username, password } = req.body;
-    if (username === 'admin' && password === 'password') {
-        return res.json({ token: 'dummy-jwt-token' });
-    }
-    res.status(401).json({ message: 'Invalid credentials' });
+    // const { username, password } = req.body;
+    // if (username === 'admin' && password === 'password') {
+    //     return res.json({ token: 'dummy-jwt-token' });
+    // }
+    res.status(401).json({ message: 'ChikiChiki Prince' });
 });
 
 export default router;

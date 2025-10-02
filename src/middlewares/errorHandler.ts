@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import httpStatus from 'http-status';
-import { ApiError } from '../utils/ApiError.js';
+import ApiError  from '../utils/ApiError.js';
 
 // Custom error interface (optional)
 interface CustomError extends Error {

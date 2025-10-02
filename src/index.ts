@@ -1,8 +1,9 @@
 import app from "./app.js";
+import config from "./config/config.js";
 
 
 
-const PORT = Number(process.env.PORT || 3000);
+const PORT = config.port || 8181;
 
 
 app.get("/rest",(req,res)=>{
