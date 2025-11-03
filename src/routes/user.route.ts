@@ -4,14 +4,28 @@ import {Router } from 'express';
 const router = Router();
 
 
-// Example: POST /auth/login
-router.get('/getUser', (req: Request, res: Response) => {
-    // Dummy implementation
-    // const { username, password } = req.body;
-    // if (username === 'admin' && password === 'password') {
-    //     return res.json({ token: 'dummy-jwt-token' });
-    // }
-    res.status(401).json({ message: 'ChikiChiki Prince' });
-});
+// Get current logged-in user info
+router.get('/me');
+
+// Update current user's own profile
+router.put('/me');
+
+// Change password (authenticated user)
+router.put('/change-password');
+
+// Get all users (ADMIN only)
+router.get('/');
+
+// Get a specific user by ID
+router.get('/:userId');
+
+// Update user details (ADMIN or self)
+router.put('/:userId');
+
+// Delete user (ADMIN or self)
+router.delete('/:userId');
+
+// Deactivate or suspend user (ADMIN)
+router.patch('/:userId/status');
 
 export default router;
