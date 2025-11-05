@@ -1,17 +1,28 @@
-import type { Request, Response } from 'express';
-import {Router } from 'express';
+import type { Request, Response } from "express";
+import { Router } from "express";
 
 const router = Router();
 
+// login created user
+router.post("/login");
 
-// Example: POST /auth/login
-router.post('/login', (req: Request, res: Response) => {
-    // Dummy implementation
-    const { username, password } = req.body;
-    if (username === 'admin' && password === 'password') {
-        return res.json({ token: 'dummy-jwt-token' });
-    }
-    res.status(401).json({ message: 'Invalid credentials' });
-});
+// register new user
+router.post("/register");
+
+// forgot password
+router.post("/forgot-password");
+
+// refresh token
+router.post("/refresh-token");
+
+// logout
+router.post("/logout");
+
+router.post("/reset-password");
+
+// Verify email at signup
+router.get("/verify-email/:token");
+
+router.post("/resend-verification");
 
 export default router;

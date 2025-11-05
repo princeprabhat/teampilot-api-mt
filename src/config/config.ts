@@ -30,6 +30,7 @@ const config = {
     jwtSecret: parsedEnv.data.JWT_SECRET,
     jwtExpiresIn: parsedEnv.data.JWT_EXPIRES_IN,
     // Add more config values as needed
+    
 };
 
 export default config;

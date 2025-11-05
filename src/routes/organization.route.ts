@@ -4,14 +4,34 @@ import {Router } from 'express';
 const router = Router();
 
 
-// Example: POST /auth/login
-router.post('/getOrg', (req: Request, res: Response) => {
-    // Dummy implementation
-    const { username, password } = req.body;
-    if (username === 'admin' && password === 'password') {
-        return res.json({ token: 'dummy-jwt-token' });
-    }
-    res.status(401).json({ message: 'Invalid credentials' });
-});
+// Create an Organization
+router.post('/');
+
+// Update organization details
+router.put('/:orgId');
+
+// Delete organization
+router.delete('/:orgId');
+
+// Get all organizations for a specific user
+router.get('/user/:userId');
+
+// Get a single organization by ID
+router.get('/:orgId');
+
+// Invite a member to organization (Org Admin only)
+router.post('/:orgId/members/invite');
+
+// Get all members of an organization
+router.get('/:orgId/members');
+
+// Remove a member from organization (Org Admin only)
+router.delete('/:orgId/members/:userId');
+
+// Transfer organization ownership (Org Admin only)
+router.patch('/:orgId/transfer-ownership');
+
+// Update organization settings (logo, name, permissions, etc.)
+router.patch('/:orgId/settings');
 
 export default router;
