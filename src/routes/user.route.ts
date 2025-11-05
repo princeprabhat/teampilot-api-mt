@@ -1,31 +1,30 @@
-import type { Request, Response } from 'express';
-import {Router } from 'express';
+import type { Request, Response } from "express";
+import { Router } from "express";
 
 const router = Router();
 
-
 // Get current logged-in user info
-router.get('/me');
+router.get("/me");
 
 // Update current user's own profile
-router.put('/me');
+router.put("/me");
 
 // Change password (authenticated user)
-router.put('/change-password');
+router.put("/change-password");
 
 // Get all users (ADMIN only)
-router.get('/');
+router.get("/");
 
 // Get a specific user by ID
-router.get('/:userId');
+router.get("/:userId");
 
 // Update user details (ADMIN or self)
-router.put('/:userId');
+router.put("/:userId");
 
-// Delete user (ADMIN or self)
-router.delete('/:userId');
+// Delete user (ADMIN only)
+router.delete("/:userId");
 
-// Deactivate or suspend user (ADMIN)
-router.patch('/:userId/status');
+// Deactivate or suspend user (ADMIN only)
+router.patch("/:userId/status");
 
 export default router;
